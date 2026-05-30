@@ -90,7 +90,14 @@ func _toggle_done(item: Dictionary, pressed: bool) -> void:
 			todos.set_at(i, updated)
 			return
 func _remove_todo(item: Dictionary) -> void:
-	todos.erase(item)
+	# Note how the method above replaces entries;
+	# We can't just use todos.erase(item) because of it.
+	# But we can delete by a key!
+	var key = _todo_key(item, 0)
+	for i in todos.value.size():
+		if _todo_key(todos.value[i], i) == key:
+			todos.remove_at(i)
+			return
 
 func _on_nuke_btn_pressed() -> void:
 	if todos.value.is_empty():
