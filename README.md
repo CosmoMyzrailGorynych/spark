@@ -195,14 +195,14 @@ Binds any `SparkReactiveBase` to any `Object` property. Provide a `signal_name` 
 
 Several methods simplify binding to common UI elements:
 
-| Method | Direction | Signal | Automatic value transform |
-|--------|-----------|--------|---------------------------|
-| `S.bind_label(src, target)` | one-way | — | `str(v)` |
-| `S.bind_text(src, target)` | two-way | `text_changed` | `str(v)` |
-| `S.bind_valuef(src, target)` | two-way | `value_changed` | `float(v)` |
-| `S.bind_visible(src, target, invert)` | one-way | — | optional invert |
-| `S.bind_disabled(src, target, invert)` | one-way | — | optional invert |
-| `S.bind_color(src, target)` | one-way | — | — |
+| Method | What for | Automatic value transform |
+|--------|----------|---------------------------|
+| `S.bind_label(src, target)` | One-way binding for Label and RichTextLabel | `str(v)` |
+| `S.bind_text(src, target)` | **Two-way** binding for LineEdit, TextEdit, and other Controls with `text` as their value (listens to `text_changed`) | `str(v)` |
+| `S.bind_valuef(src, target)` | **Two-way** binding for float value-based Controls. (Range subclasses like HSlider. Listens to `value_changed`.) | `float(v)` |
+| `S.bind_visible(src, target, invert)` | One-way binding for `visible`. Works with any CanvasItem. | bool w/ optional invert |
+| `S.bind_disabled(src, target, invert)` | One-way binding for `disabled` value. Works with most Controls. | bool w/ optional invert |
+| `S.bind_color(src, target)` | One-way binding for `modulate` value. Works with any CanvasItem. | — |
 
 ### Iteration
 
@@ -216,11 +216,15 @@ Watches a `SparkArray` and creates/destroys/reorders child nodes in `container` 
 `factory` receives `(item)` and must return a `Node`. An optional `key_fn(item, index)`
 provides stable identity across re-renders (defaults to index).
 
+💡 **Use `S.eachc`** if you need to pass a `SparkComputed` instead of a `SparkArray`.
+
 ```gdscript
 S.each_key(source: SparkDict, container: Node, factory: Callable) -> Callable
 ```
 
 Same as `S.each` but for `SparkDict`. Dictionary keys serve as stable identities. `factory` receives `(key, value)`.
+
+💡 **Use `S.each_keyc`** if you need to pass a `SparkComputed` instead of a `SparkDict`.
 
 ### Scope
 
@@ -229,7 +233,7 @@ S.declare(initial: Array[Callable]) -> SparkScope
 ```
 
 Groups disposers for batch cleanup. This also keeps effects and bindings in memory,
-so that they won't get cleaned up when you don't intend them to.
+so that they won't get cleaned up when you don't intend them to. Usually you will use them this way inside your `_ready` function:
 
 ```gdscript
 S.declare([
