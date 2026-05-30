@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://d1e66j5seukne"]
+
+[ext_resource type="Script" uid="uid://g2efewyevfyy" path="res://addons/spark/examples/counter/counter_example.gd" id="1_tid7f"]
+
+[node name="CounterExample" type="Control" unique_id=538719914]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tid7f")
+
+[node name="CounterLabel" type="Label" parent="." unique_id=566887663]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 137.0
+offset_bottom = 39.0
+text = "Counter value:"
+
+[node name="Label" type="Label" parent="." unique_id=938595260]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 280.0
+offset_top = 16.0
+offset_right = 320.0
+offset_bottom = 39.0
+text = "XX"
+
+[node name="DoubledValueLabel" type="Label" parent="." unique_id=32342370]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 56.0
+offset_right = 233.0
+offset_bottom = 79.0
+text = "Doubled value (computed):"
+
+[node name="DoubledLabel" type="Label" parent="." unique_id=682407609]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 280.0
+offset_top = 56.0
+offset_right = 320.0
+offset_bottom = 79.0
+text = "XX"
+
+[node name="IncrementBtn" type="Button" parent="." unique_id=120282012]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 144.0
+offset_top = 104.0
+offset_right = 224.0
+offset_bottom = 135.0
+text = "Add 1"
+
+[node name="DecrementBtn" type="Button" parent="." unique_id=1922611822]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 104.0
+offset_right = 128.0
+offset_bottom = 135.0
+text = "Subtract 1"
+
+[node name="ResetBtn" type="Button" parent="." unique_id=1499782531]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 240.0
+offset_top = 104.0
+offset_right = 320.0
+offset_bottom = 135.0
+text = "Reset"
+
+[node name="Slider" type="HSlider" parent="." unique_id=1634919123]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 160.0
+offset_right = 320.0
+offset_bottom = 192.0
+min_value = -10.0
+max_value = 10.0
+rounded = true
