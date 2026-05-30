@@ -141,7 +141,7 @@ These are read-only.
 
 ```gdscript
 var doubled := S.computed(func(): return count.value * 2)
-var label_text := S.computed(func (): return "x × 2 = %" % doubled.value)
+var label_text := S.computed(func (): return "x × 2 = %s" % doubled.value)
 ```
 
 The passed Callable will run only if its state is dirty (meaning that the state
@@ -239,6 +239,7 @@ so that they won't get cleaned up when you don't intend them to. Usually you wil
 S.declare([
 	S.bind_label(count, label),
 	S.effect(func(): print(count.value)),
+	# Other bindings and effects…
 ]).bind(self)
 ```
 
