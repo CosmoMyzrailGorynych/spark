@@ -10,11 +10,15 @@ Reactive state management for Godot 4, inspired by Svelte's runes. Declare state
 * `S.array` and `S.dict` for reactive collections
 * `S.each` and `S.each_key` to automagically manage lists of nodes from arrays and dictionaries!
 
-## Installation
+## 📥 Installation
 
 Download through [Godot Store](https://store.godotengine.org/asset/comigo-games/spark/) or [Github](https://github.com/CosmoMyzrailGorynych/spark/archive/refs/heads/main.zip), unzip, and copy the `spark` folder into your project's `addons/` folder. Enable the plugin in **Project > Project Settings > Plugins**.
 
-## Quick start
+## 🙌 Need help? Found a bug?
+
+Feel free to [start a discussion](https://github.com/CosmoMyzrailGorynych/spark/discussions) and [report issues](https://github.com/CosmoMyzrailGorynych/spark/issues) in the Github repo of this project.
+
+## 🐇 Quick start
 
 ```gdscript
 extends Control
@@ -34,22 +38,21 @@ func _ready():
 	]).bind(self) # Bind the context to the current node
 				  # so everything is freed when a node leaves the scene.
 
-func _on_increase_button_pressed():
 	# Get/change values with `your_reactive_prop.value`
 	count.value += 1
 ```
 
-## Examples
+## 🧑‍🏫 Examples
 
-See `addons/godot_reactive_state/examples/`:
+See `addons/spark/examples/`:
 
 | Example | Demonstrates |
 |---------|-------------|
 | **counter** | `S.computed`, `S.effect`, bindings (two-way and one-way) |
-| **todo** | `SparkArray`, creating UI elements with `S.each`; `S.computed`, one-way bindings |
-| **keyvalue** | `SparkDict`, creating UI elements with `S.each_key`; `S.computed`, one-way bindings |
+| **todo** | `S.array`, creating UI elements with `S.each`; `S.computed`, one-way bindings |
+| **keyvalue** | `S.dict`, creating UI elements with `S.each_key`; `S.computed`, one-way bindings |
 
-## A short introduction to Spark and reactive programming
+## ☝️🤓 A short introduction to Spark and reactive programming
 
 Reactive programming is a coding pattern that revolves around **reactive properties**:
 data containers that automatically subscribe dependencies that need to update when
@@ -79,12 +82,12 @@ Besides that, Spark provides additional helpers tailored for Godot:
 * **S.each** and **S.each_key** to automatically create and remove nodes (like UI cards)
   for each entry in a reactive Dictionary or Array.
 
-## API Reference
+## 📑 API Reference
 
 Every method for creating scopes, reactive properties, and effects, can be accessed
 through the `S` namespace ⤵️
 
-### State factories
+### 📔 State factories
 
 The first step is creating a reactive property. `S` has methods to create typed containers,
 as well as `S.state(value)` for automatic type inference.
@@ -106,7 +109,7 @@ automatically registers as a dependency.
 - `peek()` — returns the value without registering a dependency.
 
 
-#### Additional mutation methods
+#### 🧬 Additional mutation methods
 
 State is not deeply reactive. To simplify writing to `SparkArray` and `SparkDict`,
 use their instance methods instead of mutating the encapsulated values:
@@ -122,7 +125,7 @@ and Dictionary types, with few differences:
 * The `filter` method of `SparkArray`, contrary to Array's `filter`, does not return
   a new array but changes the encapsulated array in-place.
 
-#### Manual updates for arrays and dictionaries (`poke()`)
+#### 🛎️ Manual updates for arrays and dictionaries (`poke()`)
 
 Sometimes you need to insert a large group of rows into a `SparkArray`,
 or set many key-value pairs into `SparkDict`. Doing that through the mutator methods
@@ -131,7 +134,7 @@ the encapsulated array's/dictionary's methods directly through, say, `my_array.v
 and notify the subscribers at the end with `my_array.poke()`. This method does nothing besides
 notifying its subscribers about a change.
 
-### Computed (or derived) values
+### 🧮 Computed (or derived) values
 
 ```gdscript
 S.computed(fn: Callable) -> SparkComputed
@@ -154,7 +157,7 @@ The exception for this rule is when something is bound to this computed property
 for example when using `S.bind_label(my_computed, my_label)` to display its value
 in UI.
 
-### Effect
+### ✨ Effect
 
 ```gdscript
 S.effect(fn: Callable) -> Callable
@@ -168,14 +171,14 @@ var dispose = S.effect(func(): print(count.value))
 dispose.call()
 ```
 
-### Using reactive values without subscribing to them
+### 🫣 Using reactive values without subscribing to them
 
 Sometimes you may need to run an effect or create a computed value but don't necessarily need
 to rerun it when certain values change. For that, instead of using `reactive_prop.value`,
 you can use `reactive_prop.peek()` — this will return the encapsulated value
 without registering this action as a dependency.
 
-### Property binding
+### 🔗 Property binding
 
 Bindings are helper methods that subscribe to a reactive property and change the passed
 object's property, and optionally to write data back from the object to the reactive state.
@@ -192,7 +195,7 @@ S.bind(reactive_prop, target_node, property_name, signal_name = "") -> Callable
 
 Binds any `SparkReactiveBase` to any `Object` property. Provide a `signal_name` for two-way binding.
 
-### Convenience bindings
+### 💆 Convenience bindings
 
 Several methods simplify binding to common UI elements:
 
@@ -205,7 +208,7 @@ Several methods simplify binding to common UI elements:
 | `S.bind_disabled(src, target, invert)` | One-way binding for `disabled` value. Works with most Controls. | bool w/ optional invert |
 | `S.bind_color(src, target)` | One-way binding for `modulate` value. Works with any CanvasItem. | — |
 
-### Iteration
+### 📚 Iteration
 
 These two methods simplify the creation of lists of items in your UI (or other nodes):
 
@@ -227,7 +230,7 @@ Same as `S.each` but for `SparkDict`. Dictionary keys serve as stable identities
 
 💡 **Use `S.each_keyc`** if you need to pass a `SparkComputed` instead of a `SparkDict`.
 
-### Scope
+### 🔍 Scope
 
 ```gdscript
 S.declare(initial: Array[Callable]) -> SparkScope
@@ -250,7 +253,7 @@ S.declare([
   Also returns its `SparkScope`.
 - `teardown()` — call all disposers immediately
 
-### Manual memory management
+### 👇 Manual memory management
 
 `S.declare` is a very simple object with an array that holds all the references
 to effects' and bindings' teardown Callables, thus keeping them in memory together.
@@ -322,6 +325,6 @@ func _on_building_destroyed():
 		_create_battery_bindings()
 ```
 
-## License
+## 📜 License
 
 MIT
