@@ -12,7 +12,7 @@ Reactive state management for Godot 4, inspired by Svelte's runes. Declare state
 
 ## Installation
 
-Copy the `spark` folder into your project's `addons/` folder. Enable the plugin in **Project > Project Settings > Plugins**.
+Download through [Godot Store](https://store.godotengine.org/asset/comigo-games/spark/) or [Github](https://github.com/CosmoMyzrailGorynych/spark/archive/refs/heads/main.zip), unzip, and copy the `spark` folder into your project's `addons/` folder. Enable the plugin in **Project > Project Settings > Plugins**.
 
 ## Quick start
 
@@ -34,6 +34,7 @@ func _ready():
 	]).bind(self) # Bind the context to the current node
 				  # so everything is freed when a node leaves the scene.
 
+func _on_increase_button_pressed():
 	# Get/change values with `your_reactive_prop.value`
 	count.value += 1
 ```
