@@ -29,7 +29,6 @@ func bind(node: Node) -> SparkScope:
 	_bind_listener = func () -> void:
 		_exiting_tree = true
 		teardown()
-		node.tree_exiting.disconnect(_bind_listener)
 	node.tree_exiting.connect(_bind_listener)
 	_bind_node = weakref(node)
 	return self
