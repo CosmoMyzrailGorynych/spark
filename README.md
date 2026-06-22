@@ -204,8 +204,8 @@ Several methods simplify binding to common UI elements:
 | `S.bind_label(src, target)` | One-way binding for Label and RichTextLabel | `str(v)` |
 | `S.bind_text(src, target)` | **Two-way** binding for LineEdit, TextEdit, and other Controls with `text` as their value (listens to `text_changed`) | `str(v)` |
 | `S.bind_valuef(src, target)` | **Two-way** binding for float value-based Controls. (Range subclasses like HSlider. Listens to `value_changed`.) | `float(v)` |
-| `S.bind_visible(src, target, invert)` | One-way binding for `visible`. Works with any CanvasItem. | bool w/ optional invert |
-| `S.bind_disabled(src, target, invert)` | One-way binding for `disabled` value. Works with most Controls. | bool w/ optional invert |
+| `S.bind_visible(src, target, invert)` | One-way binding for `visible`. Works with any CanvasItem. | to `bool` w/ optional invert |
+| `S.bind_disabled(src, target, invert)` | One-way binding for `disabled` value. Works with most Controls. | to `bool` w/ optional invert |
 | `S.bind_color(src, target)` | One-way binding for `modulate` value. Works with any CanvasItem. | — |
 
 ### 📚 Iteration

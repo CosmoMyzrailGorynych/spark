@@ -140,7 +140,7 @@ static func bind_visible(
 	target: Object,
 	invert: bool = false
 ) -> Callable:
-	var binder = SparkBind.new(source, target, "visible", "", invert)
+	var binder = SparkBind.new(source, target, "visible", "", invert, func(v): return !!v)
 	return func(): binder._dispose()
 
 
@@ -152,7 +152,7 @@ static func bind_disabled(
 	target: Object,
 	invert: bool = false
 ) -> Callable:
-	var binder = SparkBind.new(source, target, "disabled", "", invert)
+	var binder = SparkBind.new(source, target, "disabled", "", invert, func(v): return !!v)
 	return func(): binder._dispose()
 
 
